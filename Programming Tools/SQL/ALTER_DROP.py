@@ -1,31 +1,32 @@
 import mysql.connector
 from config import *
+
 def connect_to_database():
     try:
         db = mysql.connector.connect(
             host=host,
-            user=user,
+            user=userA,
             port=port,
-            password=password,
+            password=password_root,
+            database=database,
             auth_plugin='mysql_native_password'
         )
         return db
     except Exception as e:
         print(e)
-        exit()
 
-def update_table():
+def alter_table():
     db = connect_to_database()
     try:
         sql_statement = f"""
-        UPDATE {database}.{user_table}
-        SET username = "Max", password = "sdkfh", active={0}
-        WHERE id = 1
-        """
+        ALTER TABLE {database}.{user_table} DROP testCol
+            """
         myCursor = db.cursor()
         myCursor.execute(sql_statement)
+        db.commit()
         myCursor.close()
         db.disconnect()
     except Exception as e:
         print(e)
-update_table()
+
+alter_table()

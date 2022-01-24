@@ -4,9 +4,9 @@ def connect_to_database():
     try:
         db = mysql.connector.connect(
             host=host,
-            user=user,
+            user=userA,
             port=port,
-            password=password,
+            password=password_root,
             database=database,
             auth_plugin='mysql_native_password'
         )
@@ -19,9 +19,9 @@ def database_select_from_table():
     db = connect_to_database()
     try:
         sql_statement = f"""
-        SELECT *
-        FROM yearwood.user 
-
+        SELECT {user_table}.username, {score_table}.score,  {score_table}.date
+        FROM {user_table}
+        INNER JOIN scores ON {user_table}.id = {score_table}.userid
         """
         myCursor = db.cursor()
         myCursor.execute(sql_statement)

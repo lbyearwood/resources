@@ -4,9 +4,10 @@ def connect_to_database():
     try:
         db = mysql.connector.connect(
             host=host,
-            user=user,
+            user=userA,
             port=port,
-            password=password,
+            password=password_root,
+            database=database,
             auth_plugin='mysql_native_password'
         )
         return db
@@ -14,18 +15,23 @@ def connect_to_database():
         print(e)
         exit()
 
-
-def show_databases():
+def database_select_from_table():
     db = connect_to_database()
     try:
-        sql_statement = "SHOW databases"
+        sql_statement = f"""
+        SELECT *
+        FROM yearwood.user 
+
+        """
         myCursor = db.cursor()
         myCursor.execute(sql_statement)
-        for database in myCursor:
-            print(database)
+        response = myCursor.fetchall()
+        for record in response:
+            print(record)
+        db.commit()
         myCursor.close()
         db.disconnect()
     except Exception as e:
         print(e)
 
-show_databases()
+database_select_from_table()
