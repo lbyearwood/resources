@@ -73,6 +73,8 @@ class Breakthrough():
                             self.__GetCardFromDeck(CardChoice)
                         elif DiscardOrPlay == "P": #  if the user has chosen to play the card
                             self.__PlayCardToSequence(CardChoice) # explored
+                    elif MenuChoice == "S":
+                        self.__SaveGame()
                     if self.__CurrentLock.GetLockSolved():
                         if self.bonusCounter >= 20: # solution9
                             print("You have received 0 bonus points")
@@ -183,6 +185,14 @@ class Breakthrough():
             SequenceAsString = self.__Sequence.GetCardDescriptionAt(Count) + SequenceAsString
 
             if self.__CurrentLock.CheckIfConditionMet(SequenceAsString): # check if any challenge has been met
+                if self.__CurrentLock.CheckIfConditionMet(SequenceAsString):
+                    # CODE ADDED
+                    if len(SequenceAsString) >= 13:
+                        for i in range(len(SequenceAsString) // 4):
+                            self.__MoveCard(self.__Sequence, self.__Discard, self.__Sequence.GetCardNumberAt(-1))
+                    # END ADDITION
+                    return True
+
                 return True # return true if the challenge for the current lock has been met
         return False
 
@@ -218,7 +228,7 @@ class Breakthrough():
                 # Set the challenge as True for this lock
                 self.__CurrentLock.SetChallengeMet(Count, True)
 
-    def __LoadGame(self, FileName): # game.txt
+    def __LoadGame(self, FileName): # game2.txt
         try:
             with open(FileName) as f:
                 LineFromFile = f.readline().rstrip() # read the score
@@ -238,6 +248,45 @@ class Breakthrough():
         except:
             print("File not loaded")
             return False
+
+    def __SaveGame(self): # solution13
+
+        try:
+                saveName = input("Enter a file name")
+                file = open(saveName+".txt", "w")
+                file.write(self.__Score+"\n")
+                file.write(self.__CurrentLock.GetChallengesAsString()+"\n")
+                file.write(self.__CurrentLock.GetChallengesMetAsString()+"\n")
+                if self.__Hand.GetNumberOfCards() > 0: # if the hand collection contains cards
+                    for i in range(self.__Hand.GetNumberOfCards()): # iterate through the entire collection
+                        if i == self.self.__Hand.GetNumberOfCards() -1:# if at the end of the collection
+                            hand += f"{self.__Hand.GetCardDescriptionAt(i)} {self.__Hand.GetCardNumberAt(i)}" # dont add the comma
+                        else:
+                            hand += f"{self.__Hand.GetCardDescriptionAt(i)} {self.__Hand.GetCardNumberAt(i)}," # append the card, card number and comma
+                else:
+                    hand = ""
+                file.write(hand+"\n") # add to text file
+
+                if self.__Sequence.GetNumberOfCards() > 0:
+                    seq = ",".join(
+                        [f"{self.__Sequence.GetCardDescriptionAt(i)} {self.__Sequence.GetCardNumberAt(i)}" for i in range(self.__Sequence.GetNumberOfCards())])
+                else:
+                    seq = ""
+                file.write(seq+"\n")
+                if self.__Discard.GetNumberOfCards() > 0:
+                    discard = ",".join(
+                        [f"{self.__Discard.GetCardDescriptionAt(i)} {self.__Discard.GetCardNumberAt(i)}" for i in range(self.__Discard.GetNumberOfCards())])
+                else:
+                    discard = ""
+                file.write(discard+"\n")
+                if self.__Deck.GetNumberOfCards() > 0:
+                    deck = ",".join([f"{self.__Deck.GetCardDescriptionAt(i)} {self.__Deck.GetCardNumberAt(i)}" for i in range(self.__Deck.GetNumberOfCards())])
+                else:
+                    deck = ""
+                file.write(deck+"\n")
+                print("File saved.")
+        except:
+                print("File not saved")
 
     def __LoadLocks(self):
         FileName = "locks.txt"
@@ -329,8 +378,7 @@ class Breakthrough():
             options += ", (P)eek"
         if not (self.__MulliganUsed): # solution4 - add Mulligan option to user menu
             options += ", (M)ulligan"
-
-        options += ", (Q)uit:>"
+        options += ", (Q)uit, (S)ave:>" # solution13
         Choice = input(options).upper()
         return Choice
 
