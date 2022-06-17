@@ -1,5 +1,5 @@
 # List of turtle commands
-import  turtle # import the Turtle library
+import  turtle
 t = turtle.Turtle() # instance of the turtle object
 t.penup() # take the pen off the canvas
 t.pendown() # place the pen on the canvas
@@ -12,6 +12,13 @@ turtle.colormode(255) # set the colour mode
 t.pencolor((41,253,41)) # r,g,b changes the colour of the pen
 turtle.done() # keeps the screen open after running the program
 turtle.Screen().exitonclick() # this also keeps the screen open after running the program
-
+# set the position by using goto()
+turtle.up()
+turtle.goto(-50,-50)
+turtle.down()
+# set the position by using setpos()
+turtle.up()
+turtle.setpos(-50, 50)
+turtle.down()
 
 input("End of program")
