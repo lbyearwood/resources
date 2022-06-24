@@ -10,9 +10,12 @@ t.backward(10) # move the turtle 10px backward
 t.left(90) # rotates the turtle 90 degrees to the left
 t.right(90) # rotates the turtle 90 degrees to the right
 t.pensize(100) # changes the size of the pen
-t.color('red', 'blue') # set the pen outline colour and fill colour (outline,fill)
+t.color('red', 'blue') # set the pen stroke colour and the fill colour (outline,fill)
+t.begin_fill() # start the fill process from this point
+t.begin_end() # end the fill process at this point
 t.colormode(255) # set the pen colour RGB mode
 t.pencolor((41,253,41),(41,253,41)) # Set values for Red,Green,Blue (RGB)
+
 
 #### Pen position properties
 # using goto()
