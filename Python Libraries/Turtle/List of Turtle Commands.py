@@ -19,14 +19,14 @@ t.pencolor((41,253,41),(41,253,41)) # Set values for Red,Green,Blue (RGB)
 
 #### Pen position properties
 # using goto()
-turtle.up()
-turtle.goto(-50,-50)
-turtle.down()
+t.penup() # lift the pen up
+t.goto(-50,-50) # (x,y) coordinates
+t.pendown() # put the pen down
 
 # using setpos()
-turtle.up()
-turtle.setpos(-50, 50)
-turtle.down()
+t.penup() # lift the pen up
+t.setpos(-50, 50) # (x,y) coordinates
+t.pendown() # put the pen down
 
 
 #### Window properties
