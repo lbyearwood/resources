@@ -9,12 +9,15 @@ t.forward(100) # move the turtle 10px forward
 t.backward(10) # move the turtle 10px backward
 t.left(90) # rotates the turtle 90 degrees to the left
 t.right(90) # rotates the turtle 90 degrees to the right
-t.pensize(100) # changes the size of the pen
+t.width(3) # changes the thickness of the pen to 3 pixels
 t.color('red', 'blue') # set the pen stroke colour and the fill colour (outline,fill)
+t.fillcolor("yellow") # another way to set the pen fill colour
+t.pencolor("black") # another way to set the pen colour
 t.begin_fill() # start the fill process from this point
 t.begin_end() # end the fill process at this point
 t.colormode(255) # set the pen colour RGB mode
 t.pencolor((41,253,41),(41,253,41)) # Set values for Red,Green,Blue (RGB)
+t.speed(0) # set the drawing speed 0 = Fastest to 10 = Slowest
 
 
 #### Pen position properties
@@ -30,9 +33,9 @@ t.pendown() # put the pen down
 
 
 #### Window properties
-window = turtle.Screen()
-window.bgcolor("light green")
-window.title("Turtle")
+window = turtle.Screen() # set window as the turtle screen so you can change background, title, etc
+window.bgcolor("light green") # set the window background colour to light green
+window.title("Turtle") # set the window title to 'My Turtle App'
 window.screensize(canvwidth=400, canvheight=300,bg='cyan')
 
 # exit window
