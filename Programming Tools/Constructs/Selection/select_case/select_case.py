@@ -1,4 +1,4 @@
-choice = "f"
+choice = 7
 match choice:
         case 1: # if choice is equal to 1 then
             print("option 1")
@@ -8,4 +8,5 @@ match choice:
             print("option 3")
         case _: # case anything else
             print("Invalid option")
+
 
