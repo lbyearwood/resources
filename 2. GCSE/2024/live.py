@@ -1,3 +1,4 @@
-_1234 = 1234
-
-print(_1234)
+constant_DOB = "21/02/2008"
+age = 14
+constant_DOB = "11/02/2008"
+age = 15
