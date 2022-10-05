@@ -52,7 +52,17 @@ def parkACar():
             print("Please enter a valid row and column")
 
 def removeACar():
-    pass
+    reg = input("Please enter your car reg")
+    found = False
+    for row in range(20):
+        for col in range(25):
+            if carPark[row][col] == reg:
+                carPark[row][col] = "empty"
+                found = True
+    if found == True:
+        print("Car removed")
+    else:
+        print("Car not found")
 
 def displayCarParkGrid(): # complete
     for row in carPark:
