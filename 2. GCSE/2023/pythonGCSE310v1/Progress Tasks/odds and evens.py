@@ -7,5 +7,5 @@ for i in range(1,2001): # print odd numbers using step argument
         print(i)
     else:
         evens.append(i)
-        
+
 print(evens)
