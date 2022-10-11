@@ -1,0 +1,4 @@
+Programming languages have different syntax for writing to and reading from a file
+Typically, a statement to open the file will be required
+The mode also has to be specified – e.g. write to a new file, append data to an existing file or read an existing file
+The actual file name and path needs to be assigned to the identifier used for the file in the program 
