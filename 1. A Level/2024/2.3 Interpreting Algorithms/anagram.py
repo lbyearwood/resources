@@ -16,6 +16,7 @@ def main(): # call everything from this subroutine
     while True:
         userWord = input("Enter your anagram").strip()
         validWord = isValidWord(userWord,dictionary)
+        # if the user's word is an acutal word and has not been used previously then...
         if validWord and not(isUnsed(userWord,listOfUsedAnagrams)):
             validAnagram = isAnagram(userWord,generatedWord)
             if validAnagram:
@@ -24,8 +25,8 @@ def main(): # call everything from this subroutine
                 listOfUsedAnagrams.append(userWord) # add the anagram to the used list
             else:
                 print(f"{userWord} is not an anagram")
-        else:
-            print(f"{userWord} is not a real word")
+
+
 
 def isUnsed(userWord,listOfUsedAnagrams):
     if userWord in listOfUsedAnagrams:
@@ -51,6 +52,7 @@ def isValidWord(userWord, dictionary):
     if userWord in dictionary:
         return True
     else:
+        print(f"{userWord} is not a real word")
         return False
 
 
