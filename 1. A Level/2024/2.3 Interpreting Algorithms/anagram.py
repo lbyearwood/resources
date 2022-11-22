@@ -27,7 +27,6 @@ def main(): # call everything from this subroutine
                 print(f"{userWord} is not an anagram")
 
 
-
 def isUnsed(userWord,listOfUsedAnagrams):
     if userWord in listOfUsedAnagrams:
         print("Error, you have alreay used this word")
