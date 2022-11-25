@@ -19,11 +19,10 @@ def create_table():
         db = connect_to_database()
         myCursor = db.cursor()
         SQL = """
-                CREATE TABLE users (
-                user_id INT AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(25),
-                password VARCHAR(25),
-                active BOOLEAN)
+                CREATE TABLE questions (
+                question_id INT AUTO_INCREMENT PRIMARY KEY,
+                user_number INT NOT NULL,
+                FOREIGN KEY (user_number) REFERENCES users(user_id))
         """
         myCursor.execute(SQL)
         db.commit()
