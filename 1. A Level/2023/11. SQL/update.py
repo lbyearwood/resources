@@ -14,14 +14,14 @@ def connect_to_database():
     except Exception as e:
         print(e)
 
-def insert():
+def update():
     try:
         db = connect_to_database()
         myCursor = db.cursor()
         SQL = f"""
-                INSERT INTO yearwood.users
-                (username,password,active) VALUES ('test1','tes1t',{1})
-
+                UPDATE yearwood.users
+                SET password = 'dfgdfgsdf'
+                WHERE user_id = 2
         """
         myCursor.execute(SQL)
         db.commit()
@@ -31,4 +31,4 @@ def insert():
         print(e)
 
 if __name__=="__main__":
-    insert()
+    update()

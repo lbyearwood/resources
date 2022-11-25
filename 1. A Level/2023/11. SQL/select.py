@@ -14,16 +14,24 @@ def connect_to_database():
     except Exception as e:
         print(e)
 
-def insert():
+def _select():
     try:
         db = connect_to_database()
         myCursor = db.cursor()
         SQL = f"""
-                INSERT INTO yearwood.users
-                (username,password,active) VALUES ('test1','tes1t',{1})
-
+                SELECT username, password, active
+                FROM yearwood.users
+                WHERE active = 1
         """
         myCursor.execute(SQL)
+        response = myCursor.fetchall()
+        if response != []:
+            for record in response:
+                print(record)
+        else:
+            print("None found")
+
+
         db.commit()
         myCursor.close()
         db.disconnect()
@@ -31,4 +39,4 @@ def insert():
         print(e)
 
 if __name__=="__main__":
-    insert()
+    _select()
