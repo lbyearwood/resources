@@ -52,7 +52,23 @@ class login_form(QMainWindow): # inheritance
         self.password_textbox.setEchoMode(QLineEdit.Password)
 
 
+        # Submit button
+        self.submit_button = QPushButton(self)
+        self.submit_button.setGeometry(QRect(85, 270, 140, 40))  # (x,y,w,h)
+        self.submit_button.setText("Submit")
+        font = QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        self.submit_button.setFont(font)
+        self.submit_button.clicked.connect(self.submitButtonEvent)
+
         self.show()
+
+
+    def submitButtonEvent(self):
+        username = self.username_textbox.text()
+        password = self.password_textbox.text()
+        print(username,password)
 
 if __name__ == "__main__":
     try:
