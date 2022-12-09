@@ -66,9 +66,63 @@ class login_form(QMainWindow): # inheritance
 
 
     def submitButtonEvent(self):
+
         username = self.username_textbox.text()
         password = self.password_textbox.text()
+        validInputs = self.validate_user_identifier(username,password)
+        if validInputs:
+            self.verified_user(self, username, password)
+            ...
+        else:
+            print("Invalid credentials")
+
         print(username,password)
+
+    def verified_user(self, username,password):
+        db = self.connect_to_database()
+        try:
+            SQL = f"""
+                SELECT username,password,active
+                FROM yearwood.user
+                WHERE username = {username} AND password = {password}
+                """
+            myCursor = db.cursor()
+            myCursor.execute(SQL)
+            response = myCursor.fetchall()
+            db.commit()
+            if len(response) == 0:
+                print("Invalid credentials, try again")
+            else:
+                print("Welcome")
+                self.hide()
+                # load the window
+            myCursor.close()
+            db.disconnect()
+        except Exception as e:
+            print(e)
+
+
+    def validate_user_identifier(self,username,password):
+
+        if len(username) == 0 or len(password) == 0:
+            return False
+        return True
+
+    def connect_to_database(self):
+        try:
+            db = mysql.connector.connect(
+                host = host,
+                user = user,
+                password = password,
+                database = database,
+                port = '3306',
+                auth_plugin ='mysql_native_password'
+            )
+            return db
+
+        except Exception as e:
+            print(e)
+
 
 if __name__ == "__main__":
     try:
