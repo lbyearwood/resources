@@ -66,13 +66,11 @@ class login_form(QMainWindow): # inheritance
 
 
     def submitButtonEvent(self):
-
         username = self.username_textbox.text()
         password = self.password_textbox.text()
         validInputs = self.validate_user_identifier(username,password)
         if validInputs:
-            self.verified_user(self, username, password)
-            ...
+            self.verified_user(username, password)
         else:
             print("Invalid credentials")
 
@@ -84,7 +82,7 @@ class login_form(QMainWindow): # inheritance
             SQL = f"""
                 SELECT username,password,active
                 FROM yearwood.user
-                WHERE username = {username} AND password = {password}
+                WHERE username = '{username}' AND password = '{password}'
                 """
             myCursor = db.cursor()
             myCursor.execute(SQL)
@@ -103,7 +101,6 @@ class login_form(QMainWindow): # inheritance
 
 
     def validate_user_identifier(self,username,password):
-
         if len(username) == 0 or len(password) == 0:
             return False
         return True
