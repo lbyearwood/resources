@@ -4,9 +4,11 @@ from PyQt5.QtWidgets import *
 import sys
 from config import *
 import mysql.connector
+from menu import *
 
 class login_form(QMainWindow): # inheritance
     def __init__(self): # child constructor
+        self.menu1 = menu_form()
         super().__init__() # parent constructor
         self.session_id = None
         self.setWindowTitle("Login")
@@ -70,7 +72,15 @@ class login_form(QMainWindow): # inheritance
         password = self.password_textbox.text()
         validInputs = self.validate_user_identifier(username,password)
         if validInputs:
-            self.verified_user(username, password)
+            verifiedUser = self.verified_user(username, password)
+            if verifiedUser:
+                try:
+                    self.menu1.show()
+                except Exception as e:
+                    print(e)
+                #self.hide()
+            else:
+                ...
         else:
             print("Invalid credentials")
 
@@ -88,14 +98,14 @@ class login_form(QMainWindow): # inheritance
             myCursor.execute(SQL)
             response = myCursor.fetchall()
             db.commit()
-            if len(response) == 0:
-                print("Invalid credentials, try again")
-            else:
-                print("Welcome")
-                self.hide()
-                # load the window
             myCursor.close()
             db.disconnect()
+            if len(response) == 0:
+                print("Invalid credentials, try again")
+                return False
+            else:
+                return True
+
         except Exception as e:
             print(e)
 
