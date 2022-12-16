@@ -25,7 +25,7 @@ class LoginForm(QMainWindow): # inherit the parent class
         # username label
         self.usernameLabel = QLabel(self)
         self.usernameLabel.setText("Enter username")
-        self.usernameLabel.setFont(QFont("Arial", 12, 10, True))
+        self.usernameLabel.setFont(QFont("Arial", 12, 10, False))
         self.usernameLabel.adjustSize()  # auto resize the label
         self.usernameLabel.setObjectName("usernameLabel")
         self.usernameLabel.move(30, 90)  # X, Y
@@ -38,7 +38,7 @@ class LoginForm(QMainWindow): # inherit the parent class
         # password label
         self.passwordLabel = QLabel(self)
         self.passwordLabel.setText("Enter password")
-        self.passwordLabel.setFont(QFont("Arial", 12, 10, True))
+        self.passwordLabel.setFont(QFont("Arial", 12, 10, False))
         self.passwordLabel.adjustSize()  # auto resize the label
         self.passwordLabel.setObjectName("passwordLabel")
         self.passwordLabel.move(30, 170)  # X, Y
@@ -60,15 +60,45 @@ class LoginForm(QMainWindow): # inherit the parent class
         self.submitButton.setFont(font)
         self.submitButton.clicked.connect(self.buttonEventHandler)
 
+        # error message label
+        self.errorLabel = QLabel(self)
+        self.errorLabel.setText("Incorrect Credentials! Try again")
+        self.errorLabel.setFont(QFont("Arial", 8, 10, False))
+        self.errorLabel.adjustSize()  # auto resize the label
+        self.errorLabel.setObjectName("errorMessage")
+        self.errorLabel.move(30, 240)  # X, Y
+        self.errorLabel.setHidden(True)
+
+        self.setStyleSheet("""
+            QLabel {
+                color:#ffffff;
+            }
+            QMainWindow {
+                background-color:#000000;
+            }
+            #errorMessage {
+                color:#ff0000;
+            }
+        
+        
+        """)
+
         self.show()
 
     def buttonEventHandler(self):
-        username = self.usernameTextbox.text()
-        print(f"You have entered {username}")
-
-
-
-
+        username = self.usernameTextbox.text().lower()
+        password = self.passwordTextbox.text()
+        try:
+            file = open(f"{username}.txt","r")
+            getPassword = file.read()
+            if password == getPassword:
+                print(True)
+            else:
+                print(False)
+                self.errorLabel.setHidden(False)
+        except Exception as e:
+            print("username not found")
+            self.errorLabel.setHidden(False)
 
 
 
