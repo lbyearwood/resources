@@ -2,9 +2,11 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import sys
+from menu import  menuForm
 
 class LoginForm(QMainWindow): # inherit the parent class
     def __init__(self): # define the child class constructor
+        self.m1 = menuForm()
         super().__init__()  # make use of the parent class constructor
         formWidth = 300
         formHeight = 350
@@ -93,6 +95,8 @@ class LoginForm(QMainWindow): # inherit the parent class
             getPassword = file.read()
             if password == getPassword:
                 print(True)
+                self.m1.show()
+                self.close()
             else:
                 print(False)
                 self.errorLabel.setHidden(False)
