@@ -8,7 +8,7 @@ from menu import *
 
 class login_form(QMainWindow): # inheritance
     def __init__(self): # child constructor
-        self.menu1 = menu_form()
+        self.menu1 = menu_form() # create an instance of the class i.e. an object
         super().__init__() # parent constructor
         self.session_id = None
         self.setWindowTitle("Login")

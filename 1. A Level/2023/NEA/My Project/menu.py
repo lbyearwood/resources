@@ -24,6 +24,7 @@ class menu_form(QMainWindow):
 
 
 
+
 if __name__ == "__main__":
     try:
         app = QApplication(sys.argv)
