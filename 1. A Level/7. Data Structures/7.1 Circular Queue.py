@@ -1,4 +1,4 @@
-class linearQueue:
+class circularQueue:
     def __init__(self):  # constructor
         self.maxSize = 3
         self.items = ["" for i in range(self.maxSize)] # list comprehension
@@ -15,6 +15,8 @@ class linearQueue:
         elif not self.isFull():
             self.rearPointer += 1
             self.items[self.rearPointer] = item
+            if self.rearPointer >= self.maxSize-1:
+                self.rearPointer = -1
         else:
             print("Error: Cannot enqueue as the queue is full")
 
@@ -38,18 +40,23 @@ class linearQueue:
 
 
     def isEmpty(self):
-        if self.rearPointer == -1:
-            return True
-        return False
+        for item in self.items:
+            if item != "":
+                return 0
+        self.rearPointer = -1
+        self.frontPointer = -1
+        return  1
+
 
 
     def isFull(self):  # identify whether the queue is full
-        if self.rearPointer == self.maxSize - 1:
-            return True
-        return False
+        for item in self.items:
+            if item == "":
+                return 0
+        return  1
 
 
-q1 = linearQueue()
+q1 = circularQueue()
 
 instructions = """ Choose one of the following: \noption 1 - enqueue\noption 2 - dequeue\noption 3 - peek
         >> """
