@@ -6,7 +6,7 @@ from menu import  menuForm
 
 class LoginForm(QMainWindow): # inherit the parent class
     def __init__(self): # define the child class constructor
-        self.m1 = menuForm()
+        self.m1 = menuForm() # create an instance on the menuForm class
         super().__init__()  # make use of the parent class constructor
         formWidth = 300
         formHeight = 350
@@ -68,7 +68,7 @@ class LoginForm(QMainWindow): # inherit the parent class
         self.errorLabel.setFont(QFont("Arial", 8, 10, False))
         self.errorLabel.adjustSize()  # auto resize the label
         self.errorLabel.setObjectName("errorMessage")
-        self.errorLabel.move(30, 240)  # X, Y
+        self.errorLabel.move(60, 240)  # X, Y
         self.errorLabel.setHidden(True)
 
         self.setStyleSheet("""
@@ -96,7 +96,7 @@ class LoginForm(QMainWindow): # inherit the parent class
             if password == getPassword:
                 print(True)
                 self.m1.show()
-                self.close()
+                self.hide()
             else:
                 print(False)
                 self.errorLabel.setHidden(False)
